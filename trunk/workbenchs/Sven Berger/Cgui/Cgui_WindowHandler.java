@@ -3,9 +3,10 @@
 #     Entwickler: Sven Berger
 #     Status: v.01
 #   Version: 0.1 22:35 19.03.2005
-#   Beschreibung: Diese Klasse dient dazu die Klasse Cgui_Window zu umschließen und dient dazu die zugriffe auf #  #                 die Implementierung zu zu lassen.
+#   Beschreibung: Diese Klasse dient dazu die Klasse Cgui_Window zu umschließen und dient dazu die zugriffe auf 
+#                die Implementierung zu zu lassen.
 #             Cgui_manager -> Cgui_Window
-#   ToDo: Punktobjekt(x,y) besser als dieser mist von Java;kommentare; interface
+#   ToDo: Punktobjekt(x,y) besser als dieser mist von Java;kommentare; interface; containerklassen
 */
 
 package Cgui;
