@@ -1,12 +1,13 @@
 /*  
 #   Datei: Cgui_Window.java
-#     Entwickler: Michael Schmidt
-#     Status: v.01->Testing
-#   Version: 0.1 18:35 11.03.2005
+#     Entwickler: Michael Schmidt, Sven Berger
+#     Status: v.02
+#   Version: 0.2 22:35 19.03.2005
 #   Beschreibung: Diese Klasse implementiert die grundlegenden Steuerungsfunktionen für ein Fenster
-#             Cgui-> Cgui_Windowmanager -> Cgui_Window
-#   ToDo: Pointobjekt(x,y); schließen; minimieren; (alle) Methoden aus dieser Klasse nach (Cgui) Windowmanager; package; move ifs to set_Size
+#             Cgui_manager -> Cgui_Window
+#   ToDo: Punktobjekt(x,y) besser als dieser mist von Java;
 */
+package Cgui;
 import javax.swing.JFrame;
 public class Cgui_Window extends JFrame
 {
@@ -15,7 +16,7 @@ public class Cgui_Window extends JFrame
   */
 
   //Erstellen eines globalen Objektes von JFrame
-  private JFrame fenster = new JFrame();
+  private JFrame Window = new JFrame();
 
   /*
   # <--Globale Variablen
@@ -26,63 +27,45 @@ public class Cgui_Window extends JFrame
 
  
   //Standardkonstruktor erstellt ein neues Fenster
-  private Cgui_Window()
+  protected Cgui_Window()
   {
     this.set_relSize(0.7d, 0.7d);
-    this.init_Fenster("");
+    this.init_Window("");
   }
 
-  //Standardkonstruktor mit Titelübergabe erstellt ein neues Fenster
-  public Cgui_Window(final String str_FensterTitel)
+  //Konstruktor mit Titelübergabe erstellt ein neues Fenster
+  protected Cgui_Window(final String str_WindowTitel)
   {
     this.set_relSize(0.7d, 0.7d);
-    this.init_Fenster(str_FensterTitel);
+    this.init_Window(str_WindowTitel);
   }
 
-  //Standardkonstrukor mit groeße in Pixeln erstellt ein neues Fenster
-  public Cgui_Window (final int i_SizeX, final int i_SizeY)
+  //Konstrukor mit groeße in Pixeln erstellt ein neues Fenster
+  protected Cgui_Window (final int i_SizeX, final int i_SizeY)
   {
-    //überprüft ob das Fenster in der Auflösung gesetzt werden kann
-    //wenn nicht dann wird es auf die maximale größe gesetzt( bringt keine Probleme da
-    //alle Groeßen angaben sollten relative sein obwohl funktionen für absolute werte vorhanden sing
-
-    if(i_SizeX > i_getBreite() || i_SizeY > i_getHöhe())
-    {
-      this.set_absSize(i_getBreite(), i_getHöhe());
-    }
-    else
-    {
-      this.set_absSize(i_SizeX, i_SizeY);
-    }
-    this.init_Fenster("");
+    this.set_absSize(i_SizeX, i_SizeY);
+    this.init_Window("");
   }
 
-  //Standardkonstrukor mit Titel und groeße in Pixeln erstellt ein neues Fenster
-  public Cgui_Window (final String str_FensterTitel, final int i_SizeX, final int i_SizeY)
+  //Konstrukor mit Titel und groeße in Pixeln erstellt ein neues Fenster
+  protected Cgui_Window (final String str_WindowTitel, final int i_SizeX, final int i_SizeY)
   {
-    if(i_SizeX > i_getBreite() || i_SizeY > i_getHöhe())
-    {
-      this.set_absSize(i_getBreite(), i_getHöhe());
-    }
-    else
-    {
-      this.set_absSize(i_SizeX, i_SizeY);
-    }
-    this.init_Fenster(str_FensterTitel);
+    this.set_absSize(i_SizeX, i_SizeY);
+    this.init_Window(str_WindowTitel);
   }
 
-  //Standardkonstruktor mit relativer Groeße erstellt ein neues Fenster
-  public Cgui_Window (final double drel_SizeX, final double drel_SizeY)
+  //Konstruktor mit relativer Groeße erstellt ein neues Fenster
+  protected Cgui_Window (final double drel_SizeX, final double drel_SizeY)
   {
     this.set_relSize(drel_SizeX, drel_SizeY);
-    this.init_Fenster("");
+    this.init_Window("");
   }
 
-  //Standardkonstruktor mit Titel und relativer Groeße erstellt ein neues Fenster
-  public Cgui_Window (final String str_FensterTitel, final double drel_SizeX, final double drel_SizeY)
+  //Konstruktor mit Titel und relativer Groeße erstellt ein neues Fenster
+  public Cgui_Window (final String str_WindowTitel, final double drel_SizeX, final double drel_SizeY)
   {
     this.set_relSize(drel_SizeX, drel_SizeY);
-    this.init_Fenster(str_FensterTitel);
+    this.init_Window(str_WindowTitel);
   }
   /*
   # <--Konstruktoren
@@ -93,7 +76,7 @@ public class Cgui_Window extends JFrame
   //ändert die Grösse
   private void set_Size(final double drel_SizeX, final double drel_SizeY, final int i_SizeX, final int i_SizeY)
   {
-    this.fenster.setSize((int)(i_SizeX * drel_SizeX),(int)(i_SizeY * drel_SizeY));
+    this.Window.setSize((int)(i_SizeX * drel_SizeX),(int)(i_SizeY * drel_SizeY));
   }
 
   //Herausfinden der wirklichen Bildschirmaufloesung(y)
@@ -109,10 +92,11 @@ public class Cgui_Window extends JFrame
   }
 
   //initialiesiert das Fenster
-  private void init_Fenster(String str_FensterTitel)
+  private void init_Window(String str_WindowTitel)
   {
-    this.fenster.setTitle(str_FensterTitel);
-    this.fenster.show();
+    this.Window.setTitle(str_WindowTitel);
+    this.Window.setDefaultLookAndFeelDecorated(true);
+    this.Window.show();
   }
 
   /*
@@ -122,15 +106,31 @@ public class Cgui_Window extends JFrame
   # Methoden-->
   */
   //ändert die relative Groeße des Fensters
-  public void set_relSize(final double drel_SizeX, final double drel_SizeY)
+  protected void set_relSize(final double drel_SizeX, final double drel_SizeY)
   {
     this.set_Size( drel_SizeX, drel_SizeY, i_getBreite(), i_getHöhe());
   }
 
   //ändert die Groeße des Fensters
-  public void set_absSize(final int i_SizeX, final int i_SizeY)
+  protected void set_absSize(final int i_SizeX, final int i_SizeY)
   {
     this.set_Size(1.0d, 1.0d, i_SizeX, i_SizeY);
+  }
+  
+/*  protected void set_position(x ,y)
+  {
+	this.Window.setLocation(new Point(x, y));
+  }*/
+
+  protected JFrame get_WindowObjekt()
+  {
+  	return (this.Window);
+  }
+
+  protected void change_resizeEnabled()
+  {
+	if(this.Window.isResizable())this.Window.setResizable(false);
+      else this.Window.setResizable(true);   
   }
   /*
   # <--Methoden
