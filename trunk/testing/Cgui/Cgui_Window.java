@@ -25,23 +25,27 @@ public class Cgui_Window extends JFrame
   */
 
  
-  //Standardkonstruktor
+  //Standardkonstruktor erstellt ein neues Fenster
   private Cgui_Window()
   {
     this.set_relSize(0.7d, 0.7d);
     this.init_Fenster("");
   }
 
-  //Standardkonstruktor mit Titel¸bergabe
+  //Standardkonstruktor mit Titel¸bergabe erstellt ein neues Fenster
   public Cgui_Window(final String str_FensterTitel)
   {
     this.set_relSize(0.7d, 0.7d);
     this.init_Fenster(str_FensterTitel);
   }
 
-  //Standardkonstrukor mit groeﬂe in Pixeln
+  //Standardkonstrukor mit groeﬂe in Pixeln erstellt ein neues Fenster
   public Cgui_Window (final int i_SizeX, final int i_SizeY)
   {
+    //¸berpr¸ft ob das Fenster in der Auflˆsung gesetzt werden kann
+    //wenn nicht dann wird es auf die maximale grˆﬂe gesetzt( bringt keine Probleme da
+    //alle Groeﬂen angaben sollten relative sein obwohl funktionen f¸r absolute werte vorhanden sing
+
     if(i_SizeX > i_getBreite() || i_SizeY > i_getHˆhe())
     {
       this.set_absSize(i_getBreite(), i_getHˆhe());
@@ -53,7 +57,7 @@ public class Cgui_Window extends JFrame
     this.init_Fenster("");
   }
 
-  //Standardkonstrukor mit Titel und groeﬂe in Pixeln
+  //Standardkonstrukor mit Titel und groeﬂe in Pixeln erstellt ein neues Fenster
   public Cgui_Window (final String str_FensterTitel, final int i_SizeX, final int i_SizeY)
   {
     if(i_SizeX > i_getBreite() || i_SizeY > i_getHˆhe())
@@ -67,14 +71,14 @@ public class Cgui_Window extends JFrame
     this.init_Fenster(str_FensterTitel);
   }
 
-  //Standardkonstruktor mit relativer Groeﬂe
+  //Standardkonstruktor mit relativer Groeﬂe erstellt ein neues Fenster
   public Cgui_Window (final double drel_SizeX, final double drel_SizeY)
   {
     this.set_relSize(drel_SizeX, drel_SizeY);
     this.init_Fenster("");
   }
 
-  //Standardkonstruktor mit Titel und relativer Groeﬂe
+  //Standardkonstruktor mit Titel und relativer Groeﬂe erstellt ein neues Fenster
   public Cgui_Window (final String str_FensterTitel, final double drel_SizeX, final double drel_SizeY)
   {
     this.set_relSize(drel_SizeX, drel_SizeY);
